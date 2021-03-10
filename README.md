@@ -97,3 +97,7 @@ ONE of the following keys must be included to embed the media item if the value 
 ## Discussion
 
 Discussion can occur here: [Issues](../../issues).
+
+### Strategies for reducing resource utilization by NFTs
+
+NFTs impose a RAM burden on witness and API nodes by virtue of the fact that asset objects, including description field are kept in RAM. Token creators should do their utmost to reduce the storage footprints of their artwork, however, a storage burden in some form is inescapable. Aside from storing links to content instead of actual content data, one option to reduce the RAM hit might be to publish the NFT with full artwork, but then in a subsequent block to replace the nft_object field contents and replace with an object that refers to the block number in which the original publication occurred.  Further discussion of this possibility is [here: (issues/1)](../../issues/1).
