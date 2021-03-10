@@ -92,3 +92,7 @@ ONE of the following keys must be included to embed the media item if the value 
 |-|-|
 | `password_multihash` | If the media item and/or narrative fields are encrypted, e.g. with AES encryption, this field can contain the ipfs multihash of a file containing either the unlock passphrase or other instructions for how to decrypt the work. (Note that ipfs multihashes can be computed *without* necessarily publishing, so that this multihash provides a mechanism to reveal the decryption keys at a future date, and publish in such a way that an NFT viewer can easily retrieve the needed information for rendering. A standardized format for these password files is T.B.D.) |
 | | |
+
+## Discussion
+
+Discussion can occur here: [Issues](../../issues).
