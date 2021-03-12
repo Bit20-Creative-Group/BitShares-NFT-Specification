@@ -8,12 +8,12 @@ What follows is a DRAFT proposed specification for standardizing or regularizing
   * Asset precision should be zero
   * Asset should have a max_supply of 1 or of a very small limited number
 * Immutability
-  * BitShares assets have a disavowable permission to increase max supply. This permission must be disavowed by the issuer, else there remians a mechanism to increase issuance.
-  * Asset descriptions — important metadata that uniquely identifies the digital entity encaspulated by the NFT is stored in the Asset Description field.  Since this field is mutable, the possibility exists for the asset issuer to alter, deface, spoil, or otherwise destroy the NFT.  At present, there is no disavowable asset permission for editing the description.  For obvious reasons, it would be useful if there was one, to safeguard the NFT data, however there is not.  An alternative, however, once the NFT is created, is to transfer asset issuership of the NFT to `null-account`, whereby future asset update operations will become impossible.
+  * BitShares assets have a disavowable permission to increase max supply. This permission must be disavowed by the issuer, else there remains a mechanism to increase issuance.
+  * Asset descriptions — important metadata that uniquely identifies the digital entity encapsulated by the NFT is stored in the Asset Description field.  Since this field is mutable, the possibility exists for the asset issuer to alter, deface, spoil, or otherwise destroy the NFT.  At present, there is no disavowable asset permission for editing the description.  For obvious reasons, it would be useful if there was one, to safeguard the NFT data, however there is not.  An alternative, however, once the NFT is created, is to transfer asset issuership of the NFT to `null-account`, whereby future asset update operations will become impossible.
 
 ## Asset Description Langauge
 
-The asset `description` field can accomodate arbitrary text.  Current convention is to store a JSON blob allowing asset issuers to embed three distinct descriptive properties of the asset.  This JSON blob has the following form:  (whitespace added for visual clarity)
+The asset `description` field can accommodate arbitrary text.  Current convention is to store a JSON blob allowing asset issuers to embed three distinct descriptive properties of the asset.  This JSON blob has the following form:  (whitespace added for visual clarity)
 
 ```
 {
@@ -28,7 +28,7 @@ Where the fields have the following meanings:
 | | |
 |--------|---------|
 | `main` | Main asset description. Asset issuers can write basically whatever they want. |
-| `market` | "SYMBOL" — Client software uses this symbol to indicate a preferred, suggested, or defualt market this asset should trade against. |
+| `market` | "SYMBOL" — Client software uses this symbol to indicate a preferred, suggested, or default market this asset should trade against. |
 | `short_name` | A short (max 32 chars) name of the asset.  (E.g. "Bitcoin", for asset BTC.) |
 | | |
 
@@ -64,8 +64,8 @@ All of the following are required:
 |-|-|
 | `type` | Should be one of {"NFT/ART", ... (others t.b.d.)} |
 | `title` | Title of the work |
-| `artist` | Name or pseudonym of the artist. May also include aliases or online names or handles, to include blockchain account names or addresses which might faciliate authenticating a signing key. Example: "Arty McArtface (on BitShares as @artface)" |
-| `attestation` | Here the artist commits or dedicates the artwork to the blockchain, expressly naming the token name or ID under which the work will live, and attests to it's uniquness, e.g. that no other NFT encapsulation exists. (If a piece is a reissue, then the phrasing here should indicate as such. It can then be known that it is a *secondary* rendition, without risk of being confused with the original.) |
+| `artist` | Name or pseudonym of the artist. May also include aliases or online names or handles, to include blockchain account names or addresses which might facilitate authenticating a signing key. Example: "Arty McArtface (on BitShares as @artface)" |
+| `attestation` | Here the artist commits or dedicates the artwork to the blockchain, expressly naming the token name or ID under which the work will live, and attests to it's uniqueness, e.g. that no other NFT encapsulation exists. (If a piece is a reissue, then the phrasing here should indicate as such. It can then be known that it is a *secondary* rendition, without risk of being confused with the original.) |
 | `encoding` | Typically "base64", and indicates that the binary data of the media item has been serialized to ascii using base64 encoding |
 | `narrative` | A personal statement from the artist describing the work, such as what the work means to them, or what inspired it.  May include details of it's creation, etc.  It's a freeform field, and can be adapted as appropriate for the piece.  Example, if the work is an avatar, playing card, role playing character, etc., then this field may also include stats and abilities, strengths, weaknesses, etc.  |
 | `pubkeyhex` | Hex encoding of the bytes of the artist's public key in compressed form.  This will be used to validate the artist's signature. (NOTE: While this allows to validate the signature, it does not _authenticate_ the signature.  Establishing whether this is in fact the public key of the artist is a separate process.) |
