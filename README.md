@@ -110,7 +110,7 @@ The following is not a comprehensive list, and additional media types may be def
 |-|-|
 | `tags` | Comma-separated list of keywords to facilitate topic/interest searches. |
 | `flags` | Comma-separated list of semistandardized FLAG keywords to indicate important information to viewers and parsers. Example: "NSFW" | 
-| `license` | License under which the artwork is released.  Often, this will be a simple license identifier, such as "CC-BY-NC-SA", though it can also be a fully specified verbose license. |
+| `license` | License under which the artwork is released.  Often, this will be a simple license identifier, such as "CC BY-NC-SA 2.0", though it can also be a fully specified verbose license. |
 | `holder_license` | If the token grants additional license for the use of the creative work specifically to token holders, this can be specified here.  An example of such a license might be granting to the holder of the NFT token the right print and sell physical copies of the tokenized artwork, or to collect royalties for commercial use of the artwork, etc. |
 | `password_multihash` | If the media item and/or narrative fields are encrypted, e.g. with AES encryption, this field can contain the ipfs multihash of a file containing either the unlock passphrase or other instructions for how to decrypt the work. (Note that ipfs multihashes can be computed *without* necessarily publishing, so that this multihash provides a mechanism to reveal the decryption keys at a future date, and publish in such a way that an NFT viewer can easily retrieve the needed information for rendering. A standardized format for these password files is T.B.D.) |
 | | |
