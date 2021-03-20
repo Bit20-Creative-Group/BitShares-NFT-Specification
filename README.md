@@ -85,6 +85,7 @@ The following keys are considered required for the NFT to be formally correct.  
 | `title` | Title of the work |
 | `artist` | Name or pseudonym of the artist. May also include aliases or online names or handles, to include blockchain account names or addresses which might facilitate authenticating a signing key. Example: "Arty McArtface (on BitShares as @artface)" |
 | `narrative` | A personal statement from the artist describing the work, such as what the work means to them, or what inspired it.  May include details of it's creation, etc.  It's a freeform field, and can be adapted as appropriate for the piece.  Example, if the work is an avatar, playing card, role playing character, etc., then this field may also include stats and abilities, strengths, weaknesses, etc.  |
+| _media key(s)_ | (Described below.) |
 | | |
 
 
@@ -110,7 +111,8 @@ The following is not a comprehensive list, and additional media types may be def
 |-|-|
 | `tags` | Comma-separated list of keywords to facilitate topic/interest searches. |
 | `flags` | Comma-separated list of semistandardized FLAG keywords to indicate important information to viewers and parsers. Example: "NSFW" | 
-| `license` | License under which the artwork is released.  Often, this will be a simple license identifier, such as "CC BY-NC-SA 2.0", though it can also be a fully specified verbose license. |
+| `acknowledgments` | Acknowledgments or additional credits for the digital token.  E.g., _"Artwork prepared for digital tokenization by Amalgamated Tokenworks, LTD."_ |
+| `license` | License under which the artwork is released.  Often, this will be a simple license identifier, such as _"CC BY-NC-SA 2.0"_, though it can also be a fully specified verbose license. |
 | `holder_license` | If the token grants additional license for the use of the creative work specifically to token holders, this can be specified here.  An example of such a license might be granting to the holder of the NFT token the right print and sell physical copies of the tokenized artwork, or to collect royalties for commercial use of the artwork, etc. |
 | `password_multihash` | If the media item and/or narrative fields are encrypted, e.g. with AES encryption, this field can contain the ipfs multihash of a file containing either the unlock passphrase or other instructions for how to decrypt the work. (Note that ipfs multihashes can be computed *without* necessarily publishing, so that this multihash provides a mechanism to reveal the decryption keys at a future date, and publish in such a way that an NFT viewer can easily retrieve the needed information for rendering. A standardized format for these password files is T.B.D.) |
 | | |
