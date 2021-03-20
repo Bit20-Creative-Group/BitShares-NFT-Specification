@@ -90,7 +90,9 @@ The following keys are considered required for the NFT to be formally correct.  
 
 #### Media item keys for type NFT/ART:
 
-ONE of the following keys must be included to embed the media item if the value of the `type` field is "NFT/ART".  The particular key used indicates the file type.  Note, the data contained in the value is encoded according to the value of the required `encoding` key, unless the key is a multihash key, in which case the `encoding` key can be ignored.  This is not a comprehensive list.  
+Typically ONE of the following keys must be included to embed the media item if the value of the `type` field is "NFT/ART".  The particular key used indicates the file type.  Note, the data contained in the value is serialized according to the value of the required `encoding` key, unless the media is referenced by an ipfs multihash, in which case the `encoding` key can be ignored.  If MORE than one of the following keys are used, it SHOULD be a combination of one data type and a multihash of the same type.  In this case, the embedded image is understood to be a preview or thumbnail of a full-resolution image referenced by multihash.
+
+The following is not a comprehensive list, and additional media types may be defined. 
 
 | | |
 |-|-|
@@ -102,7 +104,7 @@ ONE of the following keys must be included to embed the media item if the value 
 | `image_jpeg_multihash` | An ipfs multihash of an image file in JPEG format |
 | | |
 
-### Optional Keys:
+### Optional and Proposed Keys:
 
 | | |
 |-|-|
