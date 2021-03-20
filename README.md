@@ -58,23 +58,42 @@ The NFT object shall be represented as a canonicalized JSON blob containing all 
 
 ### Required keys:
 
-All of the following are required:
+The following keys are required of all NFTs. Following that, some keys will be required depending on the type of NFT defined.
 
 | | |
 |-|-|
-| `type` | Should be one of {"NFT/ART", ... (others t.b.d.)} |
-| `title` | Title of the work |
-| `artist` | Name or pseudonym of the artist. May also include aliases or online names or handles, to include blockchain account names or addresses which might facilitate authenticating a signing key. Example: "Arty McArtface (on BitShares as @artface)" |
-| `attestation` | Here the artist commits or dedicates the artwork to the blockchain, expressly naming the token name or ID under which the work will live, and attests to it's uniqueness, e.g. that no other NFT encapsulation exists. (If a piece is a reissue, then the phrasing here should indicate as such. It can then be known that it is a *secondary* rendition, without risk of being confused with the original.) |
-| `encoding` | Typically "base64", and indicates that the binary data of the media item has been serialized to ascii using base64 encoding |
-| `narrative` | A personal statement from the artist describing the work, such as what the work means to them, or what inspired it.  May include details of it's creation, etc.  It's a freeform field, and can be adapted as appropriate for the piece.  Example, if the work is an avatar, playing card, role playing character, etc., then this field may also include stats and abilities, strengths, weaknesses, etc.  |
+| `type` | Should be one of:<br><br>&nbsp;&nbsp;"NFT/ART",<br>&nbsp;&nbsp;"NFT/DOCUMENT",...<br><br>(Others t.b.d.) Types can optionally be subspaced to convey extra context by appending "/SUBSPACE". (Possible examples: "NFT/ART/VISUAL", "NFT/ART/MUSIC".) |
+| `attestation` | Here the artist commits or dedicates the artwork to the blockchain, expressly naming the token or asset ID under which the work will live, and attests to its qualified or unqualified uniqueness. E.g., an artist may attest that no other NFT encapsulation of this work exists, and may declare intent as to future re-issues, or tokenization on other chains, etc.<br><br>Example:<br><br>_"I, [Artist Name], originator of the work herein, hereby commit this piece of art to the BitShares blockchain, to live as the token named TOKEN.NAME, and attest that no prior tokenization of this art exists or has been authorized by me. The work is original, and is fully mine to dedicate in this way. The right to re-issue this artwork under other tokens is [reserved, disavowed]."_ |
+| `encoding` | Typically "base64", and indicates that the binary data of the media item or other binary fields have been serialized to ascii using base64 encoding |
 | `pubkeyhex` | Hex encoding of the bytes of the artist's public key in compressed form.  This will be used to validate the artist's signature. (NOTE: While this allows to validate the signature, it does not _authenticate_ the signature.  Establishing whether this is in fact the public key of the artist is a separate process.) |
 | | |
 
+#### Type spaces:
 
-### Media item keys:
+| | |
+|-|-|
+| `NFT/ART` | Artistic works |
+| `NFT/DOCUMENT` | Example: a journalist writes an article, or an author writes a short story, and the token conveys publication rights. |
+| | |
 
-ONE of the following keys must be included to embed the media item if the value of the `type` field is "NFT/ART".  The particular key used indicates the file type.  Note, the data contained in the value is encoded according to the value of the required `encoding` key, unless the key is a multihash key, in which case the `encoding` key can be ignored.
+#### Keys required by type NFT/ART:
+
+The following keys are considered required for the NFT to be formally correct.  (Technically, this is more of a "strong suggestion".)  However, fields may be empty strings if the artist does not wish to supply content for them.
+
+| | |
+|-|-|
+| `title` | Title of the work |
+| `artist` | Name or pseudonym of the artist. May also include aliases or online names or handles, to include blockchain account names or addresses which might facilitate authenticating a signing key. Example: _"Arty McArtface (on BitShares as @artface)"_ |
+| `narrative` | A personal statement from the artist describing the work, such as what the work means to them, or what inspired it.  May include details of it's creation, etc.  It's a freeform field, and can be adapted as appropriate for the piece.  Example, if the work is an avatar, playing card, role playing character, etc., then this field may also include stats and abilities, strengths, weaknesses, etc.  |
+| _media key(s)_ | (Described below.) |
+| | |
+
+
+#### Media item keys for type NFT/ART:
+
+Typically ONE of the following keys must be included to embed the media item if the value of the `type` field is "NFT/ART".  The particular key used indicates the file type.  Note, the data contained in the value is serialized according to the value of the required `encoding` key, unless the media is referenced by an ipfs multihash, in which case the `encoding` key can be ignored.  If MORE than one of the following keys are used, it SHOULD be a combination of one data type and a multihash of the same type.  In this case, the embedded image is understood to be a preview or thumbnail of a full-resolution image referenced by multihash.
+
+The following is not a comprehensive list, and additional media types may be defined. 
 
 | | |
 |-|-|
@@ -86,12 +105,16 @@ ONE of the following keys must be included to embed the media item if the value 
 | `image_jpeg_multihash` | An ipfs multihash of an image file in JPEG format |
 | | |
 
-### Optional Keys:
+### Optional and Proposed Keys:
 
 | | |
 |-|-|
+| `tags` | Comma-separated list of keywords to facilitate topic/interest searches. |
+| `flags` | Comma-separated list of semistandardized FLAG keywords to indicate important information to viewers and parsers. Example: "NSFW" | 
+| `acknowledgments` | Acknowledgments or additional credits for the digital token.  E.g., _"Artwork prepared for digital tokenization by Amalgamated Tokenworks, LTD."_ |
+| `license` | License under which the artwork is released.  Often, this will be a simple license identifier, such as _"CC BY-NC-SA 2.0"_, though it can also be a fully specified verbose license. |
+| `holder_license` | If the token grants additional license for the use of the creative work specifically to token holders, this can be specified here.  An example of such a license might be granting to the holder of the NFT token the right print and sell physical copies of the tokenized artwork, or to collect royalties for commercial use of the artwork, etc. |
 | `password_multihash` | If the media item and/or narrative fields are encrypted, e.g. with AES encryption, this field can contain the ipfs multihash of a file containing either the unlock passphrase or other instructions for how to decrypt the work. (Note that ipfs multihashes can be computed *without* necessarily publishing, so that this multihash provides a mechanism to reveal the decryption keys at a future date, and publish in such a way that an NFT viewer can easily retrieve the needed information for rendering. A standardized format for these password files is T.B.D.) |
-| `license` | If the token grants additional license for the use of the creative work outside of the usual and customary rendering or presentation by NFT viewers, wallets, block explorers, decentralized exchanges, or the sharing of such representations on social media or other venues, or other activities or utilization generally accompanying or associated with NFT community and culture, such grants of license may be articulated here.  Note that this is an OPTIONAL field meant to extend the utility of a token by including grants of license not considered implicitly granted by the creation of the NFT itself. It is NOT meant as a way to place restrictions that would go against what is considered regular and customary for NFTs.  An example of such a grant of license might be granting to the holder of the NFT token the right print and sell physical copies of the tokenized artwork, or to collect royalties for commercial use of the artwork, etc. |
 | | |
 
 ## Discussion
