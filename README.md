@@ -63,20 +63,28 @@ The following keys are required of all NFTs. Following that, some keys will be r
 | | |
 |-|-|
 | `type` | String beginning with "NFT/" composed of uppercase letters, the "/" character, and optionally "@" and numerals. Example values:<br><br>&nbsp;&nbsp;"NFT/ART",<br>&nbsp;&nbsp;"NFT/DOCUMENT",...<br><br>(Others t.b.d.) Types can optionally be subspaced to convey extra context by appending "/SUBSPACE". (Possible examples: "NFT/ART/VISUAL", "NFT/ART/MUSIC".) They may also be versioned by appending "@x.y". |
-| `attestation` | Here the artist commits or dedicates the artwork to the blockchain, expressly naming the token or asset ID under which the work will live, and attests to its qualified or unqualified uniqueness. E.g., an artist may attest that no other NFT encapsulation of this work exists, and may declare intent as to future re-issues, or tokenization on other chains, etc.<br><br>Example:<br><br>_"I, [Artist Name], originator of the work herein, hereby commit this piece of art to the BitShares blockchain, to live as the token named TOKEN.NAME, and attest that no prior tokenization of this art exists or has been authorized by me. The work is original, and is fully mine to dedicate in this way. The right to re-issue this artwork under other tokens is [reserved, disavowed]."_ |
+| `attestation` | Here the artist or originator of the encapsulated material commits or dedicates the material to the blockchain, expressly naming the token or asset ID under which the work will live, and attests to its qualified or unqualified uniqueness. E.g., an artist may attest that no other NFT encapsulation of this work exists, and may declare intent as to future re-issues, or tokenization on other chains, etc.<br><br>Example:<br><br>_"I, [Artist Name], originator of the work herein, hereby commit this piece of art to the BitShares blockchain, to live as the token named TOKEN.NAME, and attest that no prior tokenization of this art exists or has been authorized by me. The work is original, and is fully mine to dedicate in this way. The right to re-issue this artwork under other tokens is [reserved, disavowed]."_ |
 | `encoding` | Typically "base64", and indicates that the binary data of the media item or other binary fields have been serialized to ascii using base64 encoding |
 | `pubkeyhex` | Hex encoding of the bytes of the artist's public key in compressed form.  This will be used to validate the artist's signature. (NOTE: While this allows to validate the signature, it does not _authenticate_ the signature.  Establishing whether this is in fact the public key of the artist is a separate process.) |
 | | |
 
 #### Type spaces:
 
+This document seeks only to build out a proposed convention for the "NFT/ART/VISUAL" type space.  Other protocol spaces listed here are merely to suggest the possibility of other applications of NFTs.  Whoever wishes to deploy NFTs using a protocol space other than "NFT/ART" or "NFT/ART/VISUAL" shall bear the responsibility of establishing and documenting sensible conventions.
+
 | | |
 |-|-|
 | `NFT/ART` | Artistic works |
+| `NFT/ART/VISUAL` | Visual artistic works. (Media types such as .png, .gif, .jpeg, etc.) |
+| `NFT/ART/VISUAL@1.0` | Visaul artistic works. Viewer must be capable of at least version 1.0 of the "NFT/ART/VISUAL spec. (Version number specifies a minimum compatible version, and should only be included in the type string if features are used that cannot be represented properly in an older viewer.) |
+| `NFT/ART/VISUAL/SOMETHING` | Where "SOMETHING" is some label that establishes some agreed upon or conventional formatting or extensions to "NFT/ART/VISUAL" spec.  NFT artists are encouraged to explore and play with such subspaces.  It is expected that viewers that understand only "NFT/ART/VISUAL should in most cases display these NFTs more-or-less corrrectly, although perhaps missing some details or extra metadata that a subspace-specific viewer would understand. |
+| `NFT/ART/MUSIC` | Songs, MIDI, etc. |
 | `NFT/DOCUMENT` | Example: a journalist writes an article, or an author writes a short story, and the token conveys publication rights. |
+| `NFT/DEED` | Property (virtual or real) deeds |
+| `NFT/PASSPORT` | Token holder may obtain access to, say, a virtual reality "country" or other exclusive space. |
 | | |
 
-#### Keys required by type NFT/ART:
+#### Keys expected by type NFT/ART:
 
 The following keys are considered required for the NFT to be formally correct.  (Technically, this is more of a "strong suggestion".)  However, fields may be empty strings if the artist does not wish to supply content for them.
 
