@@ -84,9 +84,9 @@ This document seeks only to build out a proposed convention for the "NFT/ART/VIS
 | `NFT/PASSPORT` | Token holder may obtain access to, say, a virtual reality "country" or other exclusive space. |
 | | |
 
-#### Keys expected by type NFT/ART:
+#### Keys expected for type NFT/ART:
 
-The following keys are considered required for the NFT to be formally correct.  (Technically, this is more of a "strong suggestion".)  However, fields may be empty strings if the artist does not wish to supply content for them.
+The following keys are conventional and expected for NFT's in the "ART" subspace.  They are strongly suggested, however this spec does not specifically forbid omitting them.
 
 | | |
 |-|-|
