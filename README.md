@@ -56,15 +56,18 @@ with the following meanings:
 
 The NFT object shall be represented as a canonicalized JSON blob containing all the of required fields and some combination of the optional fields described below.  A canonicalized JSON blob is an ascii JSON serialization in which keys appear in lexicographically sorted order, and in which all non-quoted whitespace is removed (no space between keys and values, no linebreaks, no indentation, etc.). Additionally, quoted text should escape control sequences and special characters (such as linebreaks, tabs, unicode characters, etc.).
 
-### Required keys:
+#### Specification vs. convention:
 
-The following keys are required of all NFTs. Following that, some keys will be required depending on the type of NFT defined.
+This document is not meant to impose a rigorous standard that "must" be followed.  Rather, it is intended to establish common conventions that people will _want_ to abide by.   What exactly is to be included in the `nft_object` may be situationally dependent, and NFT creators are entitled to the full freedom to experiment and alter or extend the suggested conventions here.
+
+### Core keys:
+
+The following keys are the core attributes that are most strongly suggested for NFTs following this document. They declare what type of NFT is being constructed, establish a firm intentional linkage between the token and the embedded content, and identify the public key or address of the party that will digitally sign the NFT object.  In the sections following this one, additional keys are suggested that vary based on the specific type of NFT being created.
 
 | | |
 |-|-|
 | `type` | String beginning with "NFT/" composed of uppercase letters, the "/" character, and optionally "@" and numerals. Example values:<br><br>&nbsp;&nbsp;"NFT/ART",<br>&nbsp;&nbsp;"NFT/DOCUMENT",...<br><br>(Others t.b.d.) Types can optionally be subspaced to convey extra context by appending "/SUBSPACE". (Possible examples: "NFT/ART/VISUAL", "NFT/ART/MUSIC".) They may also be versioned by appending "@x.y". |
 | `attestation` | Here the artist or originator of the encapsulated material commits or dedicates the material to the blockchain, expressly naming the token or asset ID under which the work will live, and attests to its qualified or unqualified uniqueness. E.g., an artist may attest that no other NFT encapsulation of this work exists, and may declare intent as to future re-issues, or tokenization on other chains, etc.<br><br>Example:<br><br>_"I, [Artist Name], originator of the work herein, hereby commit this piece of art to the BitShares blockchain, to live as the token named TOKEN.NAME, and attest that no prior tokenization of this art exists or has been authorized by me. The work is original, and is fully mine to dedicate in this way. The right to re-issue this artwork under other tokens is [reserved, disavowed]."_ |
-| `encoding` | Typically "base64", and indicates that the binary data of the media item or other binary fields have been serialized to ascii using base64 encoding |
 | `pubkeyhex` | Hex encoding of the bytes of the artist's public key in compressed form.  This will be used to validate the artist's signature. (NOTE: While this allows to validate the signature, it does not _authenticate_ the signature.  Establishing whether this is in fact the public key of the artist is a separate process.) |
 | | |
 
@@ -93,6 +96,7 @@ The following keys are conventional and expected for NFT's in the "ART" subspace
 | `title` | Title of the work |
 | `artist` | Name or pseudonym of the artist. May also include aliases or online names or handles, to include blockchain account names or addresses which might facilitate authenticating a signing key. Example: _"Arty McArtface (on BitShares as @artface)"_ |
 | `narrative` | A personal statement from the artist describing the work, such as what the work means to them, or what inspired it.  May include details of it's creation, etc.  It's a freeform field, and can be adapted as appropriate for the piece.  Example, if the work is an avatar, playing card, role playing character, etc., then this field may also include stats and abilities, strengths, weaknesses, etc.  |
+| `encoding` | Typically "base64", and indicates that the binary data of the media item or other binary fields have been serialized to ascii using base64 encoding |
 | _media key(s)_ | (Described below.) |
 | | |
 
@@ -118,7 +122,7 @@ The following is not a comprehensive list, and additional media types may be def
 | | |
 |-|-|
 | `tags` | Comma-separated list of keywords to facilitate topic/interest searches. |
-| `flags` | Comma-separated list of semistandardized FLAG keywords to indicate important information to viewers and parsers. Example: "NSFW" | 
+| `flags` | Comma-separated list of semistandardized FLAG keywords to indicate important information to viewers and parsers. Example: "NSFW".  Subspacing may be used here, e.g. "NSFW/NUDITY", to convey a specific reason for the NSFW tag. This field could also accommodate a "TRIGGER" flag with subspaces to convey trigger warnings. | 
 | `acknowledgments` | Acknowledgments or additional credits for the digital token.  E.g., _"Artwork prepared for digital tokenization by Amalgamated Tokenworks, LTD."_ |
 | `license` | License under which the artwork is released.  Often, this will be a simple license identifier, such as _"CC BY-NC-SA 2.0"_, though it can also be a fully specified verbose license. |
 | `holder_license` | If the token grants additional license for the use of the creative work specifically to token holders, this can be specified here.  An example of such a license might be granting to the holder of the NFT token the right print and sell physical copies of the tokenized artwork, or to collect royalties for commercial use of the artwork, etc. |
