@@ -110,12 +110,12 @@ The following is not a comprehensive list, and additional media types may be def
 
 | | |
 |-|-|
-| `image_png` | An image file in PNG format |
-| `image_gif` | An image file in GIF format |
-| `image_jpeg` | An image file in JPEG format |
-| `image_png_multihash` | An ipfs multihash of an image file in PNG format |
-| `image_gif_multihash` | An ipfs multihash of an image file in GIF format |
-| `image_jpeg_multihash` | An ipfs multihash of an image file in JPEG format |
+| `media_png` | An image file in PNG format |
+| `media_gif` | An image file in GIF format |
+| `media_jpeg` | An image file in JPEG format |
+| `media_png_multihash` | An ipfs multihash of an image file in PNG format |
+| `media_gif_multihash` | An ipfs multihash of an image file in GIF format |
+| `media_jpeg_multihash` | An ipfs multihash of an image file in JPEG format |
 | | |
 
 ### Optional and Proposed Keys:
